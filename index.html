@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>aliniralinmaz.com — Arsa & Arazi Karar Motoru</title>
+  <meta name="description" content="Arsa ve arazi için 100 puanlık skor, risk analizi ve nihai karar. Alınır mı, alınmaz mı? Bir Zeck House kuruluşudur." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ÜST BAR -->
+  <header class="topbar">
+    <a class="brand" href="#" data-go="home">
+      <span class="brand-mark">A<span class="dot">·</span>A</span>
+      <span class="brand-text">aliniralinmaz<span class="tld">.com</span></span>
+    </a>
+    <nav class="topnav">
+      <a href="#" data-go="home">Ana Sayfa</a>
+      <a href="#" data-go="step-temel">Analiz Et</a>
+      <a href="#" data-go="premium">Premium</a>
+      <a href="#" data-go="iletisim">İletişim</a>
+    </nav>
+  </header>
+
+  <main id="app">
+
+    <!-- ============ EKRAN: ANA SAYFA ============ -->
+    <section class="screen active" id="home">
+      <div class="hero">
+        <div class="hero-inner">
+          <p class="eyebrow">Bir Zeck House kuruluşudur</p>
+          <h1>Bu arsa <span class="hl-yes">alınır</span> mı,<br><span class="hl-no">alınmaz</span> mı?</h1>
+          <p class="lead">
+            Taşınmaz bilgilerinizi girin; <strong>100 puanlık skor</strong>, risk analizi,
+            bölge yorumu ve <strong>nihai karar</strong> saniyeler içinde önünüzde.
+            Sadece “kaç para eder?” değil — “<em>bu arsadan en fazla para nasıl kazanılır?</em>”
+          </p>
+          <div class="hero-cta">
+            <button class="btn btn-primary btn-lg" data-go="step-temel">Hemen Analiz Et — Ücretsiz</button>
+            <button class="btn btn-ghost btn-lg" data-go="premium">Premium Rapor</button>
+          </div>
+        </div>
+
+        <!-- Anlatım animasyonu: 3 adım -->
+        <div class="explainer">
+          <div class="exp-step" style="--d:0s">
+            <div class="exp-icon">①</div>
+            <h3>Veri Gir</h3>
+            <p>İl, ilçe, ada/parsel, imar ve fiyat. Bildiğin kadarını gir, gerisini sistem yorumlar.</p>
+          </div>
+          <div class="exp-arrow">→</div>
+          <div class="exp-step" style="--d:.4s">
+            <div class="exp-icon">②</div>
+            <h3>Analiz</h3>
+            <p>Fiyat, imar, ulaşım, altyapı, bölge potansiyeli ve riskler 7 başlıkta puanlanır.</p>
+          </div>
+          <div class="exp-arrow">→</div>
+          <div class="exp-step" style="--d:.8s">
+            <div class="exp-icon">③</div>
+            <h3>Karar</h3>
+            <p>ALINABİLİR’den UZAK DUR’a net bir karar + kazanç senaryosu.</p>
+          </div>
+        </div>
+
+        <div class="why">
+          <h2>Neden aliniralinmaz.com?</h2>
+          <div class="why-grid">
+            <div class="why-card"><h4>Tarafsız Skor</h4><p>Duygusal değil, kriterlere dayalı 100 puanlık değerlendirme.</p></div>
+            <div class="why-card"><h4>Risk Görünür</h4><p>Hukuki, imar, likidite, finansal, altyapı ve doğal riskler tek raporda.</p></div>
+            <div class="why-card"><h4>Kazanç Odaklı</h4><p>“En fazla para nasıl kazanılır?” sorusuna geliştirme senaryosu.</p></div>
+            <div class="why-card"><h4>Uzman Geçiş</h4><p>Ön analizden Zeck House premium fizibiliteye tek adım.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ WIZARD ÜST İLERLEME ============ -->
+    <div class="wizard-progress" id="wizardProgress" hidden>
+      <div class="wp-step" data-wp="step-temel">1 · Temel</div>
+      <div class="wp-step" data-wp="step-gelismis">2 · Gelişmiş</div>
+      <div class="wp-step" data-wp="step-amac">3 · Amaç</div>
+      <div class="wp-step" data-wp="sonuc">4 · Sonuç</div>
+    </div>
+
+    <!-- ============ EKRAN: TEMEL VERİ ============ -->
+    <section class="screen" id="step-temel">
+      <div class="card form-card">
+        <h2>Hızlı Veri Girişi</h2>
+        <p class="muted">Taşınmazın temel kimliği. Ada/parsel ile haritada ayrıca inceleyebilirsin.</p>
+
+        <div class="field">
+          <label>İlan / parsel linki <span class="opt">(opsiyonel)</span></label>
+          <input type="text" id="ilanLink" placeholder="Emlak ilanı veya parsel linki yapıştır" />
+          <small class="help">Not: Site sunucusuz çalıştığı için link otomatik taranmaz; bilgileri aşağıya kendin girersin. Link rapora referans olarak eklenir.</small>
+        </div>
+
+        <div class="grid-2">
+          <div class="field">
+            <label>İl</label>
+            <select id="il"></select>
+          </div>
+          <div class="field">
+            <label>İlçe</label>
+            <select id="ilce"><option value="">Önce il seçin</option></select>
+          </div>
+          <div class="field">
+            <label>Mahalle / Köy</label>
+            <input list="mahalleList" id="mahalle" placeholder="Önce ilçe seçin" autocomplete="off" />
+            <datalist id="mahalleList"></datalist>
+          </div>
+          <div class="field">
+            <label>Yüzölçümü (m²)</label>
+            <input type="number" id="m2" min="0" placeholder="örn. 850" />
+          </div>
+          <div class="field">
+            <label>Ada</label>
+            <input type="text" id="ada" placeholder="Ada no" />
+          </div>
+          <div class="field">
+            <label>Parsel</label>
+            <input type="text" id="parsel" placeholder="Parsel no" />
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Taşınmaz türü</label>
+          <div class="chip-group" id="turGroup"></div>
+        </div>
+
+        <div class="form-nav">
+          <button class="btn btn-ghost" data-go="home">← Geri</button>
+          <button class="btn btn-primary" data-next="step-gelismis">Devam →</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ EKRAN: GELİŞMİŞ VERİ ============ -->
+    <section class="screen" id="step-gelismis">
+      <div class="card form-card">
+        <h2>Gelişmiş Veriler</h2>
+        <p class="muted">Teknik, altyapı, bölge sinyalleri ve finansal bilgiler.</p>
+
+        <h3 class="sec">Teknik</h3>
+        <div class="grid-2">
+          <div class="field">
+            <label>İmar durumu</label>
+            <input type="text" id="imarDurumu" placeholder="örn. Ayrık nizam konut, TAKS 0.30" />
+          </div>
+          <div class="field">
+            <label>Emsal</label>
+            <input type="number" id="emsal" step="0.01" min="0" placeholder="örn. 1.5" />
+          </div>
+          <div class="field">
+            <label>Hmax</label>
+            <input type="text" id="hmax" placeholder="örn. 12.50 / serbest" />
+          </div>
+          <div class="field">
+            <label>Cephe (m)</label>
+            <input type="number" id="cephe" min="0" placeholder="örn. 18" />
+          </div>
+          <div class="field">
+            <label>Ulaşım durumu</label>
+            <select id="ulasim">
+              <option value="">Seçin</option>
+              <option value="anayol">Ana yola cepheli</option>
+              <option value="yakin">Ana yola yakın</option>
+              <option value="uzak">Ana yola uzak</option>
+            </select>
+          </div>
+          <div class="field checks-inline">
+            <label class="check"><input type="checkbox" id="koseParsel" /> Köşe parsel</label>
+            <label class="check"><input type="checkbox" id="yolaCepheli" /> Yola cepheli</label>
+          </div>
+        </div>
+
+        <h3 class="sec">Altyapı</h3>
+        <div class="chk-grid" id="altyapiGroup"></div>
+
+        <h3 class="sec">Bölgesel Gelişim Sinyalleri</h3>
+        <div class="chk-grid" id="sinyalGroup"></div>
+
+        <h3 class="sec">Riskler <small class="muted">(biliniyorsa işaretle)</small></h3>
+        <div class="chk-grid" id="riskGroup"></div>
+
+        <h3 class="sec">Finansal</h3>
+        <div class="grid-2">
+          <div class="field">
+            <label>Satış fiyatı (TL)</label>
+            <input type="number" id="satisFiyati" min="0" placeholder="örn. 4500000" />
+          </div>
+          <div class="field">
+            <label>m² fiyatı (otomatik)</label>
+            <input type="text" id="m2Fiyat" readonly placeholder="Satış fiyatı / m²" />
+          </div>
+          <div class="field">
+            <label>Bölge ortalama m² fiyatı (TL)</label>
+            <input type="number" id="bolgeOrt" min="0" placeholder="Otomatik gelir; gerekirse düzenle" />
+            <small class="help" id="bolgeOrtHelp">İl/ilçe seçilince tahmini değer otomatik gelir.</small>
+          </div>
+        </div>
+
+        <div class="form-nav">
+          <button class="btn btn-ghost" data-go="step-temel">← Geri</button>
+          <button class="btn btn-primary" data-next="step-amac">Devam →</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ EKRAN: KULLANIM AMACI ============ -->
+    <section class="screen" id="step-amac">
+      <div class="card form-card">
+        <h2>Kullanım Amacı</h2>
+        <p class="muted">Amacına göre raporun yorum tonu değişir.</p>
+        <div class="chip-group big" id="amacGroup"></div>
+        <div class="form-nav">
+          <button class="btn btn-ghost" data-go="step-gelismis">← Geri</button>
+          <button class="btn btn-primary" id="btnAnaliz">Analizi Başlat →</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ EKRAN: ANALİZ OLUŞUYOR ============ -->
+    <section class="screen" id="analiz">
+      <div class="analyzing">
+        <div class="spinner"></div>
+        <h2>Analiz oluşturuluyor…</h2>
+        <p class="analyzing-msg" id="analyzingMsg">Bölge verileri değerlendiriliyor…</p>
+        <div class="progress"><div class="progress-bar" id="progBar"></div></div>
+      </div>
+    </section>
+
+    <!-- ============ EKRAN: SONUÇ PANELİ ============ -->
+    <section class="screen" id="sonuc">
+      <div class="report" id="reportRoot"><!-- app.js doldurur --></div>
+
+      <!-- Harita -->
+      <div class="card map-card">
+        <h2>Alım-Satım Yoğunluk Haritası</h2>
+        <p class="muted">Parsel sorgu ve bölge incelemesi için resmi harita.</p>
+        <div class="map-wrap" id="mapWrap">
+          <iframe id="mapFrame" title="Parsel Sorgu" loading="lazy"></iframe>
+        </div>
+        <a class="btn btn-ghost" id="mapOpen" href="https://parselsorgu.tkgm.gov.tr/" target="_blank" rel="noopener">Haritada Aç ↗</a>
+        <small class="help">Harita resmi TKGM Parsel Sorgu uygulamasından gelir; gömülemezse butonla açılır.</small>
+      </div>
+
+      <!-- Premium geçiş -->
+      <div class="card premium-cta-card">
+        <span class="badge">Bir sonraki adım</span>
+        <h2>Bu karardan en fazlasını çıkarın</h2>
+        <p>Ücretsiz skor yön gösterir; <strong>Zeck House Uzmanı</strong> ise ön analizden detaylı fizibiliteye geçirir.</p>
+        <button class="btn btn-primary btn-lg" data-go="premium">Premium Rapor Talep Et</button>
+      </div>
+
+      <div class="form-nav center">
+        <button class="btn btn-ghost" data-go="step-temel">Yeni Analiz</button>
+        <button class="btn btn-outline" onclick="window.print()">Yazdır / PDF Kaydet</button>
+      </div>
+    </section>
+
+    <!-- ============ EKRAN: PREMIUM ============ -->
+    <section class="screen" id="premium">
+      <div class="card">
+        <span class="badge gold">Premium</span>
+        <h2>Zeck House Uzmanı &amp; Premium Rapor</h2>
+        <p class="price">9.999 TL<span>+ &nbsp;(başlayan fiyatlar ile…)</span></p>
+        <ul class="feature-list">
+          <li><strong>İmar analizi:</strong> Mevcut bilgiler ve olası riskler paylaşılır.</li>
+          <li><strong>Arsa geliştirme:</strong> Arazi üzerindeki beklentiler incelenir, görüşler sunulur.</li>
+          <li><strong>Taslak proje:</strong> Talep halinde vaziyet planı, mimari hesaplar ve taslak görsel.</li>
+          <li><strong>İnşaat / kat karşılığı:</strong> Yatırımcı bulma, üretim ve satış stratejisi yönlendirmesi.</li>
+        </ul>
+
+        <h3 class="sec">Talep Formu</h3>
+        <div class="grid-2">
+          <div class="field"><label>Ad Soyad</label><input type="text" id="pAd" placeholder="Adınız" /></div>
+          <div class="field"><label>Telefon</label><input type="tel" id="pTel" placeholder="05xx xxx xx xx" /></div>
+          <div class="field"><label>İl / İlçe</label><input type="text" id="pYer" placeholder="örn. İstanbul / Beykoz" /></div>
+          <div class="field"><label>Ada / Parsel</label><input type="text" id="pParsel" placeholder="Ada / Parsel" /></div>
+        </div>
+        <div class="field"><label>Kısa not <span class="opt">(opsiyonel)</span></label>
+          <textarea id="pNot" rows="3" placeholder="Talebinizi kısaca yazın"></textarea></div>
+        <button class="btn btn-whatsapp btn-lg" id="btnWhatsapp">WhatsApp ile Talep Gönder</button>
+        <small class="help">Form bilgileriniz hazır mesaj olarak WhatsApp'a aktarılır; sunucuda saklanmaz.</small>
+      </div>
+    </section>
+
+    <!-- ============ EKRAN: İLETİŞİM ============ -->
+    <section class="screen" id="iletisim">
+      <div class="card">
+        <h2>İletişim</h2>
+        <p class="muted">aliniralinmaz.com bir <strong>Zeck House</strong> kuruluşudur.</p>
+        <ul class="contact-list">
+          <li>Instagram: <a href="https://instagram.com/aliniralinmaz" target="_blank" rel="noopener">@aliniralinmaz</a></li>
+          <li>YouTube: <a href="https://youtube.com/@aliniralinmazTv" target="_blank" rel="noopener">aliniralinmazTv</a></li>
+          <li>Web: <a href="https://www.zeckhouse.com" target="_blank" rel="noopener">zeckhouse.com</a></li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <p>© <span id="yil"></span> aliniralinmaz.com — Bir Zeck House kuruluşudur.</p>
+    <p class="disclaimer-mini">Bu sitedeki analizler yatırım tavsiyesi, ekspertiz veya hukuki görüş değildir.</p>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/scoring.js"></script>
+  <script src="js/report.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

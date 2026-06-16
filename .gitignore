@@ -1,0 +1,7 @@
+# Ham veri kaynağı ve derleme girdileri (yayına dahil edilmez)
+_raw/
+
+# OS / editör
+.DS_Store
+Thumbs.db
+*.log
