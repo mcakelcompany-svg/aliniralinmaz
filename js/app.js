@@ -273,6 +273,7 @@ function renderReport(input, sonuc, rapor) {
     <div class="card rep-page">
       <h3 class="sec">Nihai Karar — Zeck AI-ALMA Kararı (Ücretsiz)</h3>
       <div class="karar-banner ${sonuc.karar.sinif}">${sonuc.karar.etiket} · ${sonuc.toplam}/100</div>
+      <p class="help esik-not">Karar profili: <strong>${sonuc.esik.profil}</strong> — Eşikler: ALINABİLİR ≥ ${sonuc.esik.a} · KONTROLLÜ ≥ ${sonuc.esik.k} · RİSKLİ ≥ ${sonuc.esik.r}. (Arazi türü ve kullanım amacına göre ayarlanır.)</p>
       <p class="karar-paragraf">${rapor.kararParagrafi}</p>
       <h4>Kazanç / Geliştirme Senaryosu</h4>
       <ul>${rapor.senaryo.map(s => `<li>${s}</li>`).join("")}</ul>

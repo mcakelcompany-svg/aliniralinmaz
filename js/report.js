@@ -95,11 +95,14 @@ function bolgeAnalizi(input, sonuc) {
 function gelistirmeSenaryosu(input, sonuc) {
   const g = (sonuc.kirilim.find(k => k.ad === "Geliştirilebilirlik") || {}).puan || 0;
   const oneriler = [];
-  if (["konut", "villa"].includes(input.tasinmazTuru) && g >= 6) {
+  if (["konut", "villa", "konutticari"].includes(input.tasinmazTuru) && g >= 6) {
     oneriler.push("Kat karşılığı veya doğrudan inşaat ile konut/villa projesi geliştirilebilir.");
   }
   if (input.tasinmazTuru === "ticari") {
     oneriler.push("Ticari imar; dükkân/ofis veya gelir amaçlı kira modeliyle değerlendirilebilir.");
+  }
+  if (input.tasinmazTuru === "konutticari") {
+    oneriler.push("Karma imar (konut+ticari): zemin/alt katlar ticari gelir, üst katlar konut — değer ve likidite açısından en güçlü kombinasyonlardan biri.");
   }
   if (input.tasinmazTuru === "tarla") {
     oneriler.push("İmar beklentisi olgunlaşana dek tarımsal gelir; uygun koşulda ifraz/parselasyon değerlendirilebilir.");

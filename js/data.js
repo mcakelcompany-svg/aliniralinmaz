@@ -165,6 +165,7 @@ function refFiyatBul(il, ilce) {
 const TASINMAZ_TURLERI = [
   { id: "ticari",  ad: "Ticari",        imarPuan: 20 },
   { id: "konut",   ad: "Konut",         imarPuan: 18 },
+  { id: "konutticari", ad: "Konut + Ticari", imarPuan: 20 },
   { id: "villa",   ad: "Villa Arsası",  imarPuan: 18 },
   { id: "turizm",  ad: "Turizm",        imarPuan: 16 },
   { id: "sanayi",  ad: "Sanayi",        imarPuan: 14 },

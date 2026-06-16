@@ -87,7 +87,7 @@ function puanLikidite(input, fiyatPuan) {
   if (input.ulasim === "anayol") p += 2.5;
   else if (input.ulasim === "yakin") p += 1.5;
   // İmar tipi
-  if (["ticari", "konut", "villa"].includes(input.tasinmazTuru)) p += 2.5;
+  if (["ticari", "konut", "konutticari", "villa"].includes(input.tasinmazTuru)) p += 2.5;
   // Fiyat avantajı
   if (fiyatPuan >= 15) p += 2.5;
   else if (fiyatPuan >= 10) p += 1.5;
@@ -118,7 +118,7 @@ function puanGelistirilebilirlik(input) {
   if (input.koseParsel) p += 1.5;
   if (input.yolaCepheli) p += 1.5;
 
-  if (["ticari", "konut", "villa"].includes(input.tasinmazTuru)) p += 2;
+  if (["ticari", "konut", "konutticari", "villa"].includes(input.tasinmazTuru)) p += 2;
 
   // Sınırlayıcılar (yatırım/tarımsal amaçta gevşetilir — değer artışı/parselasyon potansiyeli)
   const rk = input.riskler || {};
@@ -134,11 +134,25 @@ function puanGelistirilebilirlik(input) {
   return { puan: r1(p), max: 10, not };
 }
 
+/* ---- Karar eşikleri (arazi türü + kullanım amacına göre) ----
+   a: ALINABİLİR eşiği, k: KONTROLLÜ eşiği, r: RİSKLİ eşiği */
+function kararEsikleri(input) {
+  const ag = (input.tasinmazTuru === "tarla" || input.tasinmazTuru === "zeytinlik");
+  const yatirimcil = (input.kullanimAmaci === "yatirim" || input.kullanimAmaci === "tarim");
+  if (ag && yatirimcil) {
+    return { a: 70, k: 52, r: 38, profil: "Tarımsal arazi · yatırım/tarımsal (imar beklentisiz değerlendirme)" };
+  }
+  if (ag) {
+    return { a: 85, k: 65, r: 50, profil: "Tarımsal arazi · yapılaşma amaçlı (temkinli)" };
+  }
+  return { a: 80, k: 60, r: 45, profil: "Yapılaşmaya uygun arazi · standart" };
+}
+
 /* ---- Karar etiketi ---- */
-function kararBul(toplam) {
-  if (toplam >= 80) return { etiket: "ALINABİLİR", sinif: "alinabilir" };
-  if (toplam >= 60) return { etiket: "KONTROLLÜ ALINABİLİR", sinif: "kontrollu" };
-  if (toplam >= 45) return { etiket: "RİSKLİ", sinif: "riskli" };
+function kararBul(toplam, esik) {
+  if (toplam >= esik.a) return { etiket: "ALINABİLİR", sinif: "alinabilir" };
+  if (toplam >= esik.k) return { etiket: "KONTROLLÜ ALINABİLİR", sinif: "kontrollu" };
+  if (toplam >= esik.r) return { etiket: "RİSKLİ", sinif: "riskli" };
   return { etiket: "UZAK DUR", sinif: "uzakdur" };
 }
 
@@ -214,9 +228,10 @@ function hesaplaSkor(input) {
   ];
 
   const toplam = Math.round(kirilim.reduce((s, k) => s + k.puan, 0));
-  const karar = kararBul(toplam);
+  const esik = kararEsikleri(input);
+  const karar = kararBul(toplam, esik);
   const riskler = riskleriTopla(input, fiyat, altyapi);
   const { guclu, zayif } = gucluZayif(kirilim);
 
-  return { toplam, karar, kirilim, riskler, gucluYanlar: guclu, zayifYanlar: zayif };
+  return { toplam, karar, esik, kirilim, riskler, gucluYanlar: guclu, zayifYanlar: zayif };
 }
