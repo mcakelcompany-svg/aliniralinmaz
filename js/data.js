@@ -167,8 +167,8 @@ const TASINMAZ_TURLERI = [
   { id: "konut",   ad: "Konut",         imarPuan: 18 },
   { id: "villa",   ad: "Villa Arsası",  imarPuan: 18 },
   { id: "turizm",  ad: "Turizm",        imarPuan: 16 },
-  { id: "arsa",    ad: "Arsa (Genel)",  imarPuan: 15 },
   { id: "sanayi",  ad: "Sanayi",        imarPuan: 14 },
+  { id: "zeytinlik", ad: "Zeytinlik",   imarPuan: 3  },
   { id: "tarla",   ad: "Tarla",         imarPuan: 5  }
 ];
 

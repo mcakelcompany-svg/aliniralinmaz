@@ -81,7 +81,6 @@ function puanLikidite(input, fiyatPuan) {
   else if (input.ulasim === "yakin") p += 1.5;
   // İmar tipi
   if (["ticari", "konut", "villa"].includes(input.tasinmazTuru)) p += 2.5;
-  else if (input.tasinmazTuru === "arsa") p += 1.5;
   // Fiyat avantajı
   if (fiyatPuan >= 15) p += 2.5;
   else if (fiyatPuan >= 10) p += 1.5;
@@ -113,11 +112,11 @@ function puanGelistirilebilirlik(input) {
   if (input.yolaCepheli) p += 1.5;
 
   if (["ticari", "konut", "villa"].includes(input.tasinmazTuru)) p += 2;
-  else if (input.tasinmazTuru === "arsa") p += 1;
 
   // Sınırlayıcılar
   const rk = input.riskler || {};
   if (input.tasinmazTuru === "tarla") p = Math.min(p, 4);
+  if (input.tasinmazTuru === "zeytinlik") p = Math.min(p, 3); // zeytinlik: yapılaşma yasal olarak kısıtlı
   if (rk.sit) p = Math.min(p, 2);
 
   p = clamp(p, 0, 10);

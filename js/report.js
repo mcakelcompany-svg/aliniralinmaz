@@ -95,7 +95,7 @@ function bolgeAnalizi(input, sonuc) {
 function gelistirmeSenaryosu(input, sonuc) {
   const g = (sonuc.kirilim.find(k => k.ad === "Geliştirilebilirlik") || {}).puan || 0;
   const oneriler = [];
-  if (["konut", "arsa", "villa"].includes(input.tasinmazTuru) && g >= 6) {
+  if (["konut", "villa"].includes(input.tasinmazTuru) && g >= 6) {
     oneriler.push("Kat karşılığı veya doğrudan inşaat ile konut/villa projesi geliştirilebilir.");
   }
   if (input.tasinmazTuru === "ticari") {
@@ -103,6 +103,9 @@ function gelistirmeSenaryosu(input, sonuc) {
   }
   if (input.tasinmazTuru === "tarla") {
     oneriler.push("İmar beklentisi olgunlaşana dek tarımsal gelir; uygun koşulda ifraz/parselasyon değerlendirilebilir.");
+  }
+  if (input.tasinmazTuru === "zeytinlik") {
+    oneriler.push("Zeytinlik; 3573 sayılı Zeytinciliğin Islahı Kanunu kapsamında yapılaşma ciddi şekilde kısıtlıdır. Öncelik zeytin üretimi/tarımsal gelir olmalı; yapılaşma planları için mutlaka resmi izin durumu araştırılmalıdır.");
   }
   if (Number(input.m2) >= 2000) {
     oneriler.push("Geniş yüzölçümü parselasyon/etaplı geliştirme için avantaj sağlar.");
