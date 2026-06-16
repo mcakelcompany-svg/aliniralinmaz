@@ -30,6 +30,13 @@ function puanImar(input) {
   if (input.riskler && input.riskler.sit) {
     return { puan: 0, max: 20, not: "Sit alanı — imar gücü yok kabul edildi." };
   }
+  // Yatırım/tarımsal amaçta tarımsal arazide (tarla/zeytinlik) imar yokluğu DEZAVANTAJ SAYILMAZ;
+  // değer fiyat avantajı, ulaşım, altyapı ve bölge potansiyelinden gelir.
+  const agTuru = (input.tasinmazTuru === "tarla" || input.tasinmazTuru === "zeytinlik");
+  const yatirimcil = (input.kullanimAmaci === "yatirim" || input.kullanimAmaci === "tarim");
+  if (agTuru && yatirimcil) {
+    return { puan: 13, max: 20, not: "Yatırım/tarımsal amaç: tarımsal arazide imar yokluğu olumsuz sayılmadı; değer konum, fiyat, ulaşım ve bölge potansiyelinden geliyor." };
+  }
   const tur = TASINMAZ_TURLERI.find(t => t.id === input.tasinmazTuru);
   const puan = tur ? tur.imarPuan : 12;
   const not = tur ? `${tur.ad} imar türü.` : "İmar türü belirtilmedi.";
@@ -113,10 +120,11 @@ function puanGelistirilebilirlik(input) {
 
   if (["ticari", "konut", "villa"].includes(input.tasinmazTuru)) p += 2;
 
-  // Sınırlayıcılar
+  // Sınırlayıcılar (yatırım/tarımsal amaçta gevşetilir — değer artışı/parselasyon potansiyeli)
   const rk = input.riskler || {};
-  if (input.tasinmazTuru === "tarla") p = Math.min(p, 4);
-  if (input.tasinmazTuru === "zeytinlik") p = Math.min(p, 3); // zeytinlik: yapılaşma yasal olarak kısıtlı
+  const yatirimcil = (input.kullanimAmaci === "yatirim" || input.kullanimAmaci === "tarim");
+  if (input.tasinmazTuru === "tarla") p = Math.min(p, yatirimcil ? 7 : 4);
+  if (input.tasinmazTuru === "zeytinlik") p = Math.min(p, yatirimcil ? 5 : 3); // zeytinlikte yapılaşma kısıtlı
   if (rk.sit) p = Math.min(p, 2);
 
   p = clamp(p, 0, 10);
