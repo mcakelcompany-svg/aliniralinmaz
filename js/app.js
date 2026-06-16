@@ -307,6 +307,21 @@ function sendWhatsapp() {
   window.open(`https://wa.me/${WHATSAPP_NO}?text=${msg}`, "_blank");
 }
 
+/* ----------------- İletişim formu (WhatsApp) ----------------- */
+function sendIletisim() {
+  const ad = $("#cAd").value.trim();
+  const tel = $("#cTel").value.trim();
+  const mail = $("#cMail").value.trim();
+  if (!ad || (!tel && !mail)) { alert("Lütfen ad ve en az bir iletişim bilgisi (telefon veya e-posta) girin."); return; }
+  if (!$("#cKvkk").checked) { alert("Devam etmek için kişisel veri onayını işaretleyin."); return; }
+  const konu = $("#cKonu").value;
+  const mesaj = $("#cMesaj").value.trim();
+  const msg =
+    `Merhaba, aliniralinmaz.com iletişim formu:%0A` +
+    `Ad: ${ad}%0AKonu: ${konu}%0ATelefon: ${tel || "-"}%0AE-posta: ${mail || "-"}%0AMesaj: ${mesaj || "-"}`;
+  window.open(`https://wa.me/${WHATSAPP_NO}?text=${msg}`, "_blank");
+}
+
 /* ----------------- Olay bağlama ----------------- */
 function bindEvents() {
   $$("[data-go]").forEach(el => el.addEventListener("click", e => { e.preventDefault(); goTo(el.dataset.go); }));
@@ -315,6 +330,7 @@ function bindEvents() {
   }));
   $("#btnAnaliz").addEventListener("click", runAnaliz);
   $("#btnWhatsapp").addEventListener("click", sendWhatsapp);
+  $("#btnIletisim").addEventListener("click", sendIletisim);
   $("#bolgeOrt").addEventListener("input", e => { e.target.dataset.touched = "1"; });
 }
 
