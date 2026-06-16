@@ -81,7 +81,10 @@ main{max-width:1040px;margin:0 auto;padding:clamp(20px,4vw,40px) clamp(16px,4vw,
 .hero h1{font-size:clamp(30px,5.5vw,52px);line-height:1.08;font-weight:800;letter-spacing:-.5px}
 .hl-yes{color:var(--green)}
 .hl-no{color:var(--gold)}
-.lead{margin-top:18px;font-size:clamp(15px,2vw,19px);color:#d6e4ea;max-width:680px}
+.tagline{margin-top:10px;color:#bfe7ea;font-size:clamp(15px,2.1vw,20px);font-weight:600}
+.tagline strong{color:var(--gold)}
+.lead{margin-top:16px;font-size:clamp(15px,2vw,19px);color:#d6e4ea;max-width:680px}
+.slogan{margin-top:16px;font-size:clamp(17px,2.4vw,22px);font-weight:800;color:#fff}
 .lead em{color:#fff;font-style:italic}
 .hero-cta{margin-top:28px;display:flex;gap:14px;flex-wrap:wrap}
 
@@ -277,6 +280,34 @@ input[readonly]{background:#eef3f4;color:var(--muted)}
 .feature-list li{background:#f6f9fa;border:1px solid var(--line);border-radius:10px;padding:14px 16px;font-size:14.5px}
 .contact-list{list-style:none;display:grid;gap:10px;margin-top:12px;font-size:15.5px}
 .contact-list a{color:var(--teal-d);font-weight:600}
+
+/* ---- İletişim infografik ---- */
+.contact-hero{display:flex;gap:24px;align-items:center;background:linear-gradient(135deg,var(--navy),var(--navy-2));color:#fff;overflow:hidden}
+.contact-hero-text{flex:1 1 320px}
+.contact-hero-text h2{color:#fff;margin:8px 0}
+.contact-hero-text p{color:#d6e4ea;margin-bottom:16px}
+.contact-hero-text strong{color:var(--gold)}
+.contact-hero-art{flex:1 1 240px;max-width:300px}
+.contact-hero-art svg{display:block}
+
+.info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-bottom:22px}
+.info-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px 16px;text-align:center;box-shadow:var(--shadow-sm);transition:.18s}
+.info-card:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+.info-card svg{color:var(--teal)}
+.info-card strong{display:block;font-size:22px;color:var(--navy);margin:8px 0 2px}
+.info-card span{color:var(--muted);font-size:13.5px}
+
+.channel-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:14px 0 10px}
+.channel{display:flex;align-items:center;gap:14px;text-decoration:none;background:#fbfdfd;border:1px solid var(--line);border-radius:12px;padding:14px 16px;transition:.18s}
+.channel:hover{transform:translateY(-2px);box-shadow:var(--shadow-sm);border-color:transparent}
+.ch-ic{width:46px;height:46px;border-radius:12px;display:grid;place-items:center;color:#fff;flex:none}
+.channel .ch-txt{display:flex;flex-direction:column;line-height:1.25}
+.channel .ch-txt b{color:var(--ink);font-size:15.5px}
+.channel .ch-txt small{color:var(--muted)}
+.channel.ig .ch-ic{background:linear-gradient(135deg,#f58529,#dd2a7b,#8134af)}
+.channel.yt .ch-ic{background:#ff0000}
+.channel.wa .ch-ic{background:#25d366}
+.channel.web .ch-ic{background:var(--teal)}
 
 /* footer */
 .footer{background:var(--navy);color:#bcd0d8;text-align:center;padding:26px 16px;font-size:13.5px}
